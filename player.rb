@@ -6,7 +6,7 @@ class Player
 	ACCELERATION = 0.5
 
 	def initialize
-		@x = @y = @vel_x = @vel_y = @andle = 0.0
+		@x = @y = @vel_x = @vel_y = @angle = 0.0
 		@score = 0
 		@image = Gosu::Image.new("media/starfighter.bmp")
 	end
