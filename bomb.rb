@@ -1,6 +1,6 @@
 require "gosu"
 require_relative 'z_order'
-require_relative 'star'
+
 
 class Bomb
 	attr_reader :x, :y

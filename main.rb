@@ -3,12 +3,13 @@ require_relative 'player'
 require_relative 'z_order'
 require_relative 'star'
 require_relative 'bomb'
+require_relative 'laser'
 
 class GameWindow < Gosu::Window
 	
 def initialize
 	super 640, 480
-	self.caption = "Gosu Tutorial Game"
+	self.caption = "Space Wars"
 
 	@background_image = Gosu::Image.new("media/space.png", :tileable => true)
 
@@ -19,9 +20,10 @@ def initialize
 	@stars = []
 
 	@bombs = []
-	# @bomb.warp(width/2.0, height)
 
 	@font = Gosu::Font.new(20)
+
+	@lasers = []
 end
 
 def update
@@ -33,12 +35,18 @@ def update
 	@player.collect_stars(@stars)
 	@player.get_exploded(@bombs)
 
-	if rand(100) < 4 && @stars.size < 25
+	# @player.shoot(@lasers) if Gosu::button_down? Gosu::KbSpace
+
+	if rand(100) < 5 && @stars.size < 35
 		@stars.push(Star.new(@star_anim))
 	end
 
-	if rand(100) < 1 && @bombs.size < 5
+	if rand(100) < 0.5 && @bombs.size < 2
 		@bombs.push(Bomb.new)
+	end
+
+	if Gosu::button_down? Gosu::KbSpace
+		@player.shoot(@lasers)
 	end
 end
 
@@ -48,6 +56,7 @@ def draw
 	@stars.each {|star| star.draw}
 	@font.draw("Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00)
 	@bombs.each {|bomb| bomb.draw}
+	@laser.each {|laser| laser.draw}
 end
 
 def button_down(id)

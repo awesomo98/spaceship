@@ -2,20 +2,23 @@ require "gosu"
 require_relative 'z_order'
 require_relative 'star'
 require_relative 'bomb'
+require_relative 'laser'
 
 class Player
 
 	TURN_INCREMENT = 4.5
 	ACCELERATION = 0.5
 	COLLISION_DISTANCE = 35
-	EXPLODING_DISTANCE = 25
+	EXPLODING_DISTANCE = 35
+	FIRING_DISTANCE = 50
 
 	def initialize
 		@x = @y = @vel_x = @vel_y = @angle = 0.0
 		@score = 0
 		@image = Gosu::Image.new("media/diver2.png")
 		@beep = Gosu::Sample.new("media/poot.wav")
-		@explosion = Gosu::Sample.new("media/exploscream.wav")
+		@explosion = Gosu::Sample.new("media/scream.wav")
+		@shot = Gosu::Sample.new("media/laser.wav")
 	end
 
 	def warp(x, y)
@@ -74,6 +77,15 @@ class Player
 		end
 	end
 
+	def shoot(lasers)
+		if lasers.reject! {|laser| shooting?(laser) }
+			@shot.play
+			true
+		else
+			false
+		end
+	end
+
 	private
 
 		def colliding?(star)
@@ -83,5 +95,10 @@ class Player
 		def exploding?(bomb)
 			Gosu::distance(@x, @y, bomb.x, bomb.y) < EXPLODING_DISTANCE
 		end
+
+		def shooting?(laser)
+			Gosu::distance(laser.x, laser.y, bomb.x, bomb.y) < FIRING_DISTANCE
+		end
+
 
 end
