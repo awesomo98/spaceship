@@ -2,7 +2,7 @@ require "gosu"
 require_relative 'z_order'
 
 class Laser
-	attr_accessor :x, :y, :width, :height, :speed
+	attr_reader :x, :y, :width, :height, :speed
   
   # def self.load_sound(window)
   #   @fire_sound ||= Gosu::Sample.new(window, 'media/laser.wav')
@@ -35,5 +35,13 @@ class Laser
   end
 
   
+ 
+  
+
+  
+
+  
 end
+
+  
 

@@ -86,6 +86,16 @@ class Player
 		end
 	end
 
+	def collides_laser(bombs)
+		if bombs.reject! {|laser| Gosu::distance(bomb.x, bomb.y, laser.x, laser.y) < 50 } then
+			# @score -= 10
+			# @explosion.play
+			true
+		else
+			false
+		end
+	end
+
 	private
 
 		def colliding?(star)
