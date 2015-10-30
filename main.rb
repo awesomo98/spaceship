@@ -4,6 +4,7 @@ require_relative 'z_order'
 require_relative 'star'
 require_relative 'bomb'
 require_relative 'laser'
+require_relative 'alien'
 
 class GameWindow < Gosu::Window
 	
@@ -24,6 +25,8 @@ def initialize
 	@font = Gosu::Font.new(20)
 
 	@lasers = []
+
+	@aliens = []
 end
 
 def update
@@ -48,6 +51,10 @@ def update
 	if Gosu::button_down? Gosu::KbSpace
 		@player.shoot(@lasers)
 	end
+
+	if rand(100) < 10 && @aliens.size < 40
+		@aliens.push(Alien.new)
+	end
 end
 
 def draw
@@ -56,6 +63,7 @@ def draw
 	@stars.each {|star| star.draw}
 	@font.draw("Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00)
 	@bombs.each {|bomb| bomb.draw}
+	@aliens.each {|alien| bomb.draw}
 	# @laser.each {|laser| laser.draw}  It's saying undefined method 'draw'
 end
 

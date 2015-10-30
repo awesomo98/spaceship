@@ -17,7 +17,7 @@ class Player
 		@score = 0
 		@image = Gosu::Image.new("media/diver2.png")
 		@beep = Gosu::Sample.new("media/poot.wav")
-		@explosion = Gosu::Sample.new("media/scream.wav")
+		@explosion = Gosu::Sample.new("media/exploscream.wav")
 		@shot = Gosu::Sample.new("media/laser.wav")
 	end
 

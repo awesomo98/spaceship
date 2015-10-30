@@ -4,5 +4,6 @@ module ZOrder
 	BOMBS = 2
 	PLAYER = 3
 	LASER = 4
-	UI = 5
+	ALIEN = 5
+	UI = 6
 end
