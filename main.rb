@@ -63,7 +63,7 @@ def draw
 	@stars.each {|star| star.draw}
 	@font.draw("Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00)
 	@bombs.each {|bomb| bomb.draw}
-	@aliens.each {|alien| bomb.draw}
+	@aliens.each {|alien| alien.draw}
 	# @laser.each {|laser| laser.draw}  It's saying undefined method 'draw'
 end
 
